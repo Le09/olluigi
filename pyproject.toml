@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "olluigi"
+version = "0.0.1"
+authors = [
+  { name="Woolion", email="wooliondrawz@gmail.com" },
+]
+description = "Small LLM pipeline using Luigi"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "luigi",
+    "requests",
+    "sqlalchemy",
+    "configargparse",
+    "chunkipy",
+    "GitPython",
+]
+
+[project.urls]
+Homepage = "https://github.com/Le09/olluigi"
+Issues = "https://github.com/Le09/olluigi/issues"
+
+[project.scripts]
+olluigi = "olluigi.main:main"

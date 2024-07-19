@@ -1,0 +1,6 @@
+luigi
+requests
+sqlalchemy
+configargparse
+chunkipy
+GitPython
