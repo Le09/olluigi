@@ -34,6 +34,14 @@ def main_arguments_parser():
         default="http://localhost:11434/api/generate",
     )
     parser.add_argument(
+        "--chunksize",
+        "-s",
+        type=int,
+        nargs="?",
+        help="Size of chunks sent to the LLM.",
+        default=200,
+    )
+    parser.add_argument(
         "--model", "-m", type=str, nargs="?", help="LLM model.", default="gemma2"
     )
     parser.add_argument(
@@ -66,14 +74,21 @@ def main():
     if args.prompt:
         p = [
             pipelines.Prompt(
-                input_file=args.input_file, prompt=args.prompt, name=args.name
+                input_file=args.input_file,
+                prompt=args.prompt,
+                name=args.name,
+                chunk_size=args.chunksize,
             )
         ]
     else:
         if args.git:
             folder_path = utils.base_path(args.input_file)
             git.is_git_repo_clean(folder_path)
-        p = [pipelines.Clarify(input_file=args.input_file, git=args.git)]
+        p = [
+            pipelines.Clarify(
+                input_file=args.input_file, git=args.git, chunk_size=args.chunksize
+            )
+        ]
     luigi.build(p)
 
 
